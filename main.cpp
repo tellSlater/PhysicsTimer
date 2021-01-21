@@ -337,7 +337,6 @@ inline void readSensors()  //Used for buffered sensor input
 // 	{
 // 		timerState = 2;
 // 	}
-	
 }
 
 inline void sensorAction()  //Used for buffered sensor input
