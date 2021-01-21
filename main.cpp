@@ -313,7 +313,7 @@ inline void calcTimer()
 	digits[3] = timerMsecs % 10;
 }
 
-inline void readSensors()
+inline void readSensors()  //Used for buffered sensor input
 {
 	if ((PIND & (1<<PIND0)) && (sensor0buffer > 0)) --sensor0buffer;	//Incrementing buffer for sensor0
 	else if (!(PIND & (1<<PIND0)) && (sensor0buffer < 4)) ++sensor0buffer;
@@ -340,7 +340,7 @@ inline void readSensors()
 	
 }
 
-inline void sensorAction()
+inline void sensorAction()  //Used for buffered sensor input
 {
 	if (timerState == 0)
 	{
@@ -395,9 +395,9 @@ int main()
 		
 		doBEEPS();
 		
-		//readSensors();
+		//readSensors(); //Used for buffered sensor input
 		
-		//sensorAction();
+		//sensorAction(); //Used for buffered sensor input
 		
 		if (timerSleep > 60000)
 		{
@@ -465,7 +465,7 @@ ISR (PCINT2_vect)
 
 //////////////////////////////////////////////////////////////////////////
 
-// FUN
+// FUN - OLD STUFF
 
 // 	digitDisplayed(0);
 // 	SRwriteByte(0xff);
