@@ -62,8 +62,7 @@ bool sensor1 = 0;					//Sensor 1 state
 bool sensor1EN = 0;					//Sensor 1 enable
 bool sensor0ArmedPosition = 0;		//If the sensor A is low when the timer is armed, then the timer begins when sensor A goes high and ends when sensor B goes high
 bool sensor1ArmedPosition = 0;		//If the sensor A is high when the timer is armed, then the timer begins when sensor A goes low and ends when sensor B goes low									
-								
-									
+															
 uint8_t digits[] = {0, 0, 0, 0};	//Values of digits of screen
 
 uint16_t timerSleep = 0;			//Timer used for sleeping the device after 60 seconds idle
