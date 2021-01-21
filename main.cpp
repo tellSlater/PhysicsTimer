@@ -1,17 +1,35 @@
 /*
- * Physics Timer
+ *	Physics Timer
  *
- *  Author: WindFish
+ *	Author: WindFish
  *
- 
- 
- 
- chip ATTiny2313a
- 
+ *	Using a 8bit shift register to drive a 4 digit 7 segment display
+ *	and based on an external 16MHz crystal and the timer 0 OVF interrupt
+ *	creating a precise timer to be used in physics experiments.
+ *	The timer with a sensor0 trigger and stops with a sensor1 trigger.
+ *	The two sensor used are infra red proximity sensors by default
+ *
+ *	chip ATTiny2313a
+ *	
+ *	PINS:
+ *	PINA0 - External crystal
+ *	PINA1 - External crystal
+ *	PINB0 - power to digit 0
+ *	PINB1 - power to digit 1
+ *	PINB2 - power to digit 2
+ *	PINB3 - power to digit 3
+ *	PINB4 - Swift register data in
+ *	PINB5 - Swift register latch
+ *	PINB6 - Swift register clock
+ *	PIND0 - Reading sensor 0 (triggered when low)
+ *	PIND1 - Reading sensor 1 (triggered when low)
+ *	PIND2 - To active beeper +
+ *	PIND3 - Push button input
+ *	PIND5 - Toggled on each timer0 overflow interrupt (can be used to confirm correct timer timing - toggling should be every 256us)
  */
  
 
-#define F_CPU   8000000
+#define F_CPU   16000000
 #define BUAD    9600
 #define BRC     ((F_CPU/16/BUAD) - 1)
 
