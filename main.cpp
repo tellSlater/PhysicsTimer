@@ -3,11 +3,10 @@
  *
  *	Author: WindFish
  *
- *	Using a 8bit shift register to drive a 4 digit 7 segment display
- *	and based on an external 16MHz crystal and the timer 0 OVF interrupt
+ *	Using an 8bit shift register to drive a 4 digit 7 segment display.
+ *	Based on an external 16MHz crystal and the timer 0 OVF interrupt
  *	creating a precise timer to be used in physics experiments.
- *	The timer with a sensor0 trigger and stops with a sensor1 trigger.
- *	The two sensor used are infra red proximity sensors by default
+ *	The timer starts with a sensor0 trigger and stops with a sensor1 trigger.
  *
  *	chip ATTiny2313a
  *	
@@ -18,9 +17,9 @@
  *	PINB1 - power to digit 1
  *	PINB2 - power to digit 2
  *	PINB3 - power to digit 3
- *	PINB4 - Swift register data in
- *	PINB5 - Swift register latch
- *	PINB6 - Swift register clock
+ *	PINB4 - Shift register data in
+ *	PINB5 - Shift register latch
+ *	PINB6 - Shift register clock
  *	PIND0 - Reading sensor 0 (triggered when low)
  *	PIND1 - Reading sensor 1 (triggered when low)
  *	PIND2 - To active beeper +
@@ -114,10 +113,7 @@ inline void setupPINSsleep()	//Data direction registers and pull up resistor con
 
 inline void enableSensor(uint8_t x) //Takes 0 or 1 as input and enables sensor 0 or 1
 {
-	if (x <= 1)
-	{
-		PCMSK2  = 1 << x;
-	}
+	PCMSK2  = 1 << x;
 }
 
 inline void disableSensors()		//Disables all sensors
@@ -411,7 +407,7 @@ int main()
 	}
 }
 
-ISR (TIMER0_OVF_vect)
+ISR (TIMER0_OVF_vect) //Timer 0 overflow interrupt used for all the timing needs
 {
 	PORTD ^= 1 << PIND5;
 	
@@ -436,7 +432,7 @@ ISR (TIMER0_OVF_vect)
 	}
 }
 
-ISR (PCINT2_vect)
+ISR (PCINT2_vect) //Pin change interrupt used for reading the sensors
 {
 	disableSensors();
 	
